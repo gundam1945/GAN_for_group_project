@@ -260,7 +260,7 @@ def reshape_tensor(samples):
 
 
 def main():
-    from gan4 import generate_sample
+    from main import generate_sample
     samples = reshape_tensor(generate_sample(10000))
     trainloader = get_transformed_dataloader(1000, True, 0, 1).__iter__()
     testloader = get_transformed_dataloader(10000, False, 0, 1).__iter__()
