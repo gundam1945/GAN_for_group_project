@@ -15,11 +15,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
+# MNIST 214
 
 class Model(object):
     def __init__(self, opt):
         self.img_shape = (opt.channels, opt.img_size, opt.img_size)
-        dir = "\\state\\gan4"
+        dir = "\\state\\gan5"
         os.makedirs(os.path.abspath(os.path.curdir) + dir, exist_ok=True)
         self.PATH_G = os.path.abspath(os.path.curdir) + dir + "\\generator.pth"
         self.PATH_D = os.path.abspath(os.path.curdir) + dir + "\\discriminator.pth"
@@ -60,8 +61,10 @@ class Model(object):
             self.model = nn.Sequential(
                 nn.Linear(int(np.prod(self.img_shape)), 512),
                 nn.LeakyReLU(0.2, inplace=True),
+                nn.Dropout(p=0.2),
                 nn.Linear(512, 256),
                 nn.LeakyReLU(0.2, inplace=True),
+                nn.Dropout(p=0.2),
                 nn.Linear(256, 25),
                 nn.LeakyReLU(0.2, inplace=True),
                 nn.Linear(25, 1),
