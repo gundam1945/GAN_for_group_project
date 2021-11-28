@@ -1,1 +1,5 @@
 images/
+*.db
+*.xml
+*.pyc
+*.png

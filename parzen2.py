@@ -173,7 +173,7 @@ def get_mean_nll(trainset, testset, samples = 0, sigma = 0):
     test = numpy.asarray(testset, dtype=aesara.config.floatX)
 
     if sigma == 0:
-        sigma_range = numpy.logspace(-1, -0.5, num=20)
+        sigma_range = numpy.logspace(-0.9, -0.6, num=20)
         sigma = cross_validate_sigma\
                 (
                     samples,
@@ -196,7 +196,7 @@ def get_sigma(trainset, testset, samples = 0):
         samples = numpy.asarray(samples, dtype=aesara.config.floatX)
     valid = numpy.asarray(trainset, dtype=aesara.config.floatX)
 
-    sigma_range = numpy.logspace(-1, -0.5, num=20)
+    sigma_range = numpy.logspace(-0.9, -0.6, num=20)
     sigma = cross_validate_sigma\
             (
                 samples,
@@ -260,7 +260,7 @@ def reshape_tensor(samples):
 
 
 def main():
-    from gan4 import generate_sample
+    from main import generate_sample
     samples = reshape_tensor(generate_sample(10000))
     trainloader = get_transformed_dataloader(1000, True, 0, 1).__iter__()
     testloader = get_transformed_dataloader(10000, False, 0, 1).__iter__()
