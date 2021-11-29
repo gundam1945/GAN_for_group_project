@@ -19,7 +19,7 @@ import torch
 class Model(object):
     def __init__(self, opt):
         self.img_shape = (opt.channels, opt.img_size, opt.img_size)
-        dir = "\\state\\gan1_normalize"
+        dir = "\\state\\cifar10\\gan1"
         os.makedirs(os.path.abspath(os.path.curdir) + dir, exist_ok=True)
         self.PATH_G = os.path.abspath(os.path.curdir) + dir + "\\generator.pth"
         self.PATH_D = os.path.abspath(os.path.curdir) + dir + "\\discriminator.pth"
@@ -39,11 +39,10 @@ class Model(object):
                 return layers
 
             self.model = nn.Sequential(
-                *block(opt.latent_dim, 128, normalize=False),
-                *block(128, 256),
-                *block(256, 512),
-                *block(512, 1024),
-                nn.Linear(1024, int(np.prod(self.img_shape))),
+                *block(opt.latent_dim, 400, normalize=False),
+                *block(400, 1200),
+                *block(1200, 3000),
+                nn.Linear(3000, int(np.prod(self.img_shape))),
                 nn.Sigmoid()
             )
 
@@ -58,7 +57,7 @@ class Model(object):
             self.img_shape = (opt.channels, opt.img_size, opt.img_size)
 
             self.model = nn.Sequential(
-                nn.Linear(int(np.prod(self.img_shape)), 512),
+                nn.Linear(int(np.prod(self.img_shape)), 1500),
                 nn.LeakyReLU(0.2, inplace=True),
                 nn.Linear(512, 256),
                 nn.LeakyReLU(0.2, inplace=True),

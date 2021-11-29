@@ -15,7 +15,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
+<<<<<<< Updated upstream
 from model6 import Model, get_dataloader
+=======
+from cifar1 import Model
+from dataloader import get_MNIST_set, get_CIFAR_set
+>>>>>>> Stashed changes
 
 
 os.makedirs("images", exist_ok=True)
@@ -29,8 +34,8 @@ parser.add_argument("--b1", type=float, default=0.9, help="adam: decay of first 
 parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
 parser.add_argument("--n_cpu", type=int, default=8, help="number of cpu threads to use during batch generation")
 parser.add_argument("--latent_dim", type=int, default=100, help="dimensionality of the latent space")
-parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
-parser.add_argument("--channels", type=int, default=1, help="number of image channels")
+parser.add_argument("--img_size", type=int, default=32, help="size of each image dimension")
+parser.add_argument("--channels", type=int, default=3, help="number of image channels")
 parser.add_argument("--sample_interval", type=int, default=400, help="interval between image samples")
 parser.add_argument("--normal_mean", type=float, default=0, help="mean to be subtracted from normal")
 parser.add_argument("--normal_sd", type=float, default=1, help="sd to be divided by difference of normal and mean")
@@ -104,7 +109,7 @@ def train_model(generator, discriminator, optimizer_G, optimizer_D, adversarial_
     # ----------
     #  Training
     # ----------
-    dataloader = get_dataloader(opt)
+    dataloader = get_CIFAR_set(opt, True)
 
     for epoch in range(opt.n_epochs):
         for i, (imgs, _) in enumerate(dataloader):
