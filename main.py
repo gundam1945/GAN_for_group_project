@@ -50,10 +50,16 @@ def main():
     discriminator = model.discriminator
 
     if os.path.isfile(model.PATH_G):
-        generator.load_state_dict(torch.load(model.PATH_G))
+        if cuda:
+            generator.load_state_dict(torch.load(model.PATH_G))
+        else:
+            generator.load_state_dict(torch.load(model.PATH_G, map_location=torch.device('cpu')))
 
     if os.path.isfile(model.PATH_D):
-        discriminator.load_state_dict(torch.load(model.PATH_D))
+        if cuda:
+            discriminator.load_state_dict(torch.load(model.PATH_D))
+        else:
+            discriminator.load_state_dict(torch.load(model.PATH_D, map_location=torch.device('cpu')))
 
     # Optimizers
     optimizer_G = torch.optim.Adam(generator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
@@ -86,7 +92,10 @@ def generate_sample(batch_size):
     generator = model.generator
 
     if os.path.isfile(model.PATH_G):
-        generator.load_state_dict(torch.load(model.PATH_G))
+        if cuda:
+            generator.load_state_dict(torch.load(model.PATH_G))
+        else:
+            generator.load_state_dict(torch.load(model.PATH_G, map_location=torch.device('cpu')))
 
     if cuda:
         generator.cuda()
