@@ -15,12 +15,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-<<<<<<< Updated upstream
-from model6 import Model, get_dataloader
-=======
 from cifar1 import Model
 from dataloader import get_MNIST_set, get_CIFAR_set
->>>>>>> Stashed changes
 
 
 os.makedirs("images", exist_ok=True)
