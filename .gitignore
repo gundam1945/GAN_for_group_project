@@ -3,3 +3,5 @@ images/
 *.xml
 *.pyc
 *.png
+state
+.idea
