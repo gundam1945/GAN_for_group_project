@@ -17,9 +17,9 @@ import torch
 
 
 class Model(object):
-    def __init__(self, opt):
+    def __init__(self, opt, dir):
         self.img_shape = (opt.channels, opt.img_size, opt.img_size)
-        dir = "\\state\\cifar10\\gan1"
+        dir = f"\\state\\cifar10\\{dir}"
         os.makedirs(os.path.abspath(os.path.curdir) + dir, exist_ok=True)
         self.PATH_G = os.path.abspath(os.path.curdir) + dir + "\\generator.pth"
         self.PATH_D = os.path.abspath(os.path.curdir) + dir + "\\discriminator.pth"
